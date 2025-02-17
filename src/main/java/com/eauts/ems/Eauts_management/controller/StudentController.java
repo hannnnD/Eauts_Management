@@ -119,4 +119,10 @@ public class StudentController {
         return ResponseEntity.ok(updatedStudent);
     }
 
+//    @GetMapping("/{id}/tuition-fee")
+//    public ResponseEntity<Double> getStudentTuitionFee(@PathVariable Long id) {
+//        double totalFee = studentService.calculateTotalTuitionFee(id);
+//        return ResponseEntity.ok(totalFee);
+//    }
+
 }

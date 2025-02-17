@@ -64,5 +64,28 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+//    public double calculateTotalTuitionFee(Long studentId) {
+//        Optional<Student> studentOpt = studentRepository.findById(studentId);
+//        if (studentOpt.isEmpty()) {
+//            throw new RuntimeException("Sinh viên không tồn tại!");
+//        }
+//
+//        Student student = studentOpt.get();
+//        ClassEntity studentClass = student.getStudentClass();
+//
+//        if (studentClass == null) {
+//            throw new RuntimeException("Sinh viên chưa được phân lớp!");
+//        }
+//
+//        List<Schedule> classSchedules = scheduleRepository.findByClassId(studentClass.getClass_id());
+//
+//        double totalFee = 0;
+//        for (Schedule schedule : classSchedules) {
+//            Course course = schedule.getCourse();
+//            totalFee += course.calculateTuitionFee();
+//        }
+//
+//        return totalFee;
+//    }
 
 }

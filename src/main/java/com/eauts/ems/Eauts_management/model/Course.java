@@ -8,13 +8,13 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courses_id;
+    private Long coursesId; // Đổi tên thành camelCase
 
-    @Column(unique = true, length = 20, nullable = false)
-    private String course_code;
+    @Column(name = "course_code", unique = true, length = 20, nullable = false)
+    private String courseCode; // Đổi từ course_code -> courseCode
 
-    @Column(nullable = false, length = 100)
-    private String course_name;
+    @Column(name = "course_name", nullable = false, length = 100)
+    private String courseName; // Đổi từ course_name -> courseName
 
     @Column(nullable = false)
     private int credits;
@@ -22,22 +22,36 @@ public class Course {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    // Getters và Setters
+    @Column(name = "tuition_fee_per_credit", nullable = false)
+    private double tuitionFeePerCredit = 500000; // Mặc định 500,000 VND/tín chỉ
 
-    public Long getCourses_id() {
-        return courses_id;
+    // Getter & Setter
+    public double calculateTuitionFee() {
+        return this.credits * this.tuitionFeePerCredit;
     }
 
-    public void setCourses_id(Long courses_id) {
-        this.courses_id = courses_id;
+    public double getTuitionFeePerCredit() {
+        return tuitionFeePerCredit;
     }
 
-    public String getCourse_code() {
-        return course_code;
+    public void setTuitionFeePerCredit(double tuitionFeePerCredit) {
+        this.tuitionFeePerCredit = tuitionFeePerCredit;
     }
 
-    public void setCourse_code(String course_code) {
-        this.course_code = course_code;
+    public Long getCoursesId() {
+        return coursesId;
+    }
+
+    public void setCoursesId(Long coursesId) {
+        this.coursesId = coursesId;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public int getCredits() {
@@ -48,12 +62,12 @@ public class Course {
         this.credits = credits;
     }
 
-    public String getCourse_name() {
-        return course_name;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getDescription() {
