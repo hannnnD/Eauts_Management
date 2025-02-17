@@ -20,11 +20,22 @@ public class Payment {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
-    private Date payment_date = new Date();
+    private Date paymentDate = new Date();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PaymentStatus status;
+
+    @Column(name = "transaction_id", unique = true, length = 100)
+    private String transactionId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method", nullable = false)
+    private PaymentMethod paymentMethod;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt = new Date();
 
     // Getters và Setters
     public Long getId() {
@@ -51,12 +62,12 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Date getPayment_date() {
-        return payment_date;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setPayment_date(Date payment_date) {
-        this.payment_date = payment_date;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public PaymentStatus getStatus() {
@@ -65,5 +76,29 @@ public class Payment {
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
