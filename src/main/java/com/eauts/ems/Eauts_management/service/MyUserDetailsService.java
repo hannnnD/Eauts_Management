@@ -2,7 +2,7 @@ package com.eauts.ems.Eauts_management.service;
 
 import com.eauts.ems.Eauts_management.model.UserPrincipal;
 import com.eauts.ems.Eauts_management.model.User;
-import com.eauts.ems.Eauts_management.repository.UserRepo;
+import com.eauts.ems.Eauts_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepo;
 
 
     @Override

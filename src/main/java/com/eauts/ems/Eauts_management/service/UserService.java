@@ -2,16 +2,20 @@ package com.eauts.ems.Eauts_management.service;
 
 import com.eauts.ems.Eauts_management.model.Role;
 import com.eauts.ems.Eauts_management.model.User;
-import com.eauts.ems.Eauts_management.repository.UserRepo;
+import com.eauts.ems.Eauts_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JWTService jwtService;
@@ -20,7 +24,7 @@ public class UserService {
     AuthenticationManager authManager;
 
     @Autowired
-    private UserRepo repo;
+    private UserRepository repo;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -50,4 +54,13 @@ public class UserService {
         return "fail";
     }
 
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Mã hóa mật khẩu
+        return userRepository.save(user);
+    }
 }
