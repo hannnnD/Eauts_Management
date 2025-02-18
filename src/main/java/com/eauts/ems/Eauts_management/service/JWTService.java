@@ -19,11 +19,9 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
-
     private String secretkey = "";
 
     public JWTService() {
-
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGen.generateKey();
@@ -33,16 +31,24 @@ public class JWTService {
         }
     }
 
-    public String generateToken(int id, String username, String role) {
+    // ✅ Sinh token có thể chứa teacher_id hoặc student_id cùng role
+    public String generateToken(int id, String username, String role, Long teacherId, Long studentId) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role); // Thêm role vào claims
+        claims.put("role", role);
         claims.put("id", id);
+        if ("TEACHER".equals(role) && teacherId != null) {
+            claims.put("teacher_id", teacherId);
+        }
+        if ("STUDENT".equals(role) && studentId != null) {
+            claims.put("student_id", studentId);
+        }
+
         return Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // 30 phút
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // Token 30 phút
                 .and()
                 .signWith(getKey())
                 .compact();
@@ -52,7 +58,13 @@ public class JWTService {
         return extractClaim(token, claims -> claims.get("role", String.class));
     }
 
+    public Integer extractTeacherId(String token) {
+        return extractClaim(token, claims -> claims.get("teacher_id", Integer.class));
+    }
 
+    public Integer extractStudentId(String token) {
+        return extractClaim(token, claims -> claims.get("student_id", Integer.class));
+    }
 
     private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretkey);
@@ -83,15 +95,10 @@ public class JWTService {
 
     private boolean isTokenExpired(String token) {
         Date expiration = extractExpiration(token);
-        System.out.println("Token expiration time: " + expiration);
-        System.out.println("Current time: " + new Date());
         return expiration.before(new Date());
     }
-
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
-
 }

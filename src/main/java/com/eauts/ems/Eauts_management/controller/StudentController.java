@@ -78,6 +78,7 @@ public class StudentController {
         newStudent.setPhone(studentRequest.getPhone());
         newStudent.setEnrollment_year(enrollmentYear);
         newStudent.setStatus(studentRequest.getStatus());
+        newStudent.setEmail(studentRequest.getEmail());
         newStudent.setUser(savedUser);
         newStudent.setStudentClass(classOptional.get()); // Gán lớp học
 

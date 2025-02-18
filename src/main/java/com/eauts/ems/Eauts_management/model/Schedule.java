@@ -9,7 +9,7 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long schedule_id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
@@ -38,12 +38,12 @@ public class Schedule {
 
     // Getters và Setters
 
-    public Long getSchedule_id() {
-        return schedule_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setSchedule_id(Long schedule_id) {
-        this.schedule_id = schedule_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Teacher getTeacher() {

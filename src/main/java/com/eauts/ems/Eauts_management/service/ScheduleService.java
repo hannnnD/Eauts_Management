@@ -63,7 +63,7 @@ public class ScheduleService {
         List<Schedule> schedules = scheduleRepository.findAll();
         return schedules.stream()
                 .map(schedule -> new ScheduleDTO(
-                        schedule.getSchedule_id(),
+                        schedule.getId(),
                         schedule.getTeacher().getFull_name(),
                         schedule.getStudentClass().getClass_name(),
                         schedule.getCourse().getCourseName(),

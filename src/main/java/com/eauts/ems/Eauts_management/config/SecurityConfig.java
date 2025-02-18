@@ -49,8 +49,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF để hỗ trợ API stateless
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Không lưu session
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).authenticated() // Bảo vệ API admin
-                        .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated() // Bảo vệ API user
+                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN") // Bảo vệ API admin
+                        .requestMatchers(new AntPathRequestMatcher("/teacher/**")).hasRole("TEACHER") // Chỉ giáo viên truy cập
+                        .requestMatchers(new AntPathRequestMatcher("/student/**")).hasRole("STUDENT") // Chỉ sinh viên truy cập
                         .anyRequest().permitAll() // Các API khác không yêu cầu xác thực
                 )
                 .addFilterBefore(new JwtFilter(jwtService, myUserDetailsService), UsernamePasswordAuthenticationFilter.class)

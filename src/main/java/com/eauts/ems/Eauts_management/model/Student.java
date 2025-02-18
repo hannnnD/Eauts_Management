@@ -41,6 +41,10 @@ public class Student {
     @Column(nullable = false)
     private StudentStatus status;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+
+
     // Getters và Setters
 
     public Long getStudent_id() {
@@ -121,5 +125,13 @@ public class Student {
 
     public void setStatus(StudentStatus status) {
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
