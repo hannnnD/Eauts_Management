@@ -1,5 +1,6 @@
 package com.eauts.ems.Eauts_management.controller;
 
+import com.eauts.ems.Eauts_management.dto.ClassDTO;
 import com.eauts.ems.Eauts_management.model.ClassEntity;
 import com.eauts.ems.Eauts_management.service.ClassService;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,9 @@ public class ClassController {
 
     // API lấy danh sách lớp học
     @GetMapping
-    public ResponseEntity<List<ClassEntity>> getAllClasses() {
-        return ResponseEntity.ok(classService.getAllClasses());
+    public ResponseEntity<List<ClassDTO>> getAllClasses() {
+        List<ClassDTO> classDTOs = classService.getAllClassesAsDTO();
+        return ResponseEntity.ok(classDTOs);
     }
 
     // API lấy lớp học theo ID

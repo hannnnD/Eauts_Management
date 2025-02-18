@@ -1,5 +1,6 @@
 package com.eauts.ems.Eauts_management.controller;
 
+import com.eauts.ems.Eauts_management.dto.ScheduleDTO;
 import com.eauts.ems.Eauts_management.model.Schedule;
 import com.eauts.ems.Eauts_management.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     @GetMapping
-    public List<Schedule> getAllSchedules() {
-        return scheduleService.getAllSchedules();
+    public ResponseEntity<List<ScheduleDTO>> getAllSchedules() {
+        List<ScheduleDTO> scheduleDTOs = scheduleService.getAllSchedulesAsDTO();
+        return ResponseEntity.ok(scheduleDTOs);
     }
 
     @GetMapping("/{id}")

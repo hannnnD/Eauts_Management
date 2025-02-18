@@ -1,10 +1,12 @@
 package com.eauts.ems.Eauts_management.service;
 
+import com.eauts.ems.Eauts_management.dto.ClassDTO;
 import com.eauts.ems.Eauts_management.model.ClassEntity;
 import com.eauts.ems.Eauts_management.repository.ClassRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClassService {
@@ -21,8 +23,15 @@ public class ClassService {
     }
 
     // Lấy danh sách tất cả lớp học
-    public List<ClassEntity> getAllClasses() {
-        return classRepository.findAll();
+    public List<ClassDTO> getAllClassesAsDTO() {
+        List<ClassEntity> classEntities = classRepository.findAll();
+        return classEntities.stream()
+                .map(classEntity -> new ClassDTO(
+                        classEntity.getClass_id(),
+                        classEntity.getClass_name(),
+                        classEntity.getMajor_name(),
+                        classEntity.getNote()))
+                .collect(Collectors.toList());
     }
 
     // Lấy thông tin lớp học theo ID

@@ -1,5 +1,6 @@
 package com.eauts.ems.Eauts_management.service;
 
+import com.eauts.ems.Eauts_management.dto.ScheduleDTO;
 import com.eauts.ems.Eauts_management.model.ClassEntity;
 import com.eauts.ems.Eauts_management.model.Courses;
 import com.eauts.ems.Eauts_management.model.Schedule;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ScheduleService {
@@ -57,8 +59,20 @@ public class ScheduleService {
 
         return scheduleRepository.save(schedule);
     }
-    public List<Schedule> getAllSchedules() {
-        return scheduleRepository.findAll();
+    public List<ScheduleDTO> getAllSchedulesAsDTO() {
+        List<Schedule> schedules = scheduleRepository.findAll();
+        return schedules.stream()
+                .map(schedule -> new ScheduleDTO(
+                        schedule.getSchedule_id(),
+                        schedule.getTeacher().getFull_name(),
+                        schedule.getStudentClass().getClass_name(),
+                        schedule.getCourse().getCourseName(),
+                        schedule.getRoom(),
+                        schedule.getShift().name(),
+                        schedule.getStart_date(),
+                        schedule.getEnd_date()
+                ))
+                .collect(Collectors.toList());
     }
 
     public Optional<Schedule> getScheduleById(Long id) {
