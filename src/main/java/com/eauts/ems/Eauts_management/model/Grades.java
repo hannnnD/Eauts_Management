@@ -1,5 +1,6 @@
 package com.eauts.ems.Eauts_management.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,14 +13,17 @@ public class Grades {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonProperty("studentId")
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "courses_id", nullable = false)
+    @JsonProperty("courseId")
     private Courses courses;
 
     @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = false)
+    @JsonProperty("scheduleId")
     private Schedule schedule;
 
     @Column(nullable = false)
@@ -33,6 +37,7 @@ public class Grades {
 
     @Column(nullable = false)
     private float total;
+
 
     // Getters và Setters
     public Long getGrades_id() {

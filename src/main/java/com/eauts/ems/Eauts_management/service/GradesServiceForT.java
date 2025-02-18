@@ -1,5 +1,6 @@
 package com.eauts.ems.Eauts_management.service;
 
+import com.eauts.ems.Eauts_management.dto.GradesDTO;
 import com.eauts.ems.Eauts_management.model.Grades;
 import com.eauts.ems.Eauts_management.model.Schedule;
 import com.eauts.ems.Eauts_management.model.Student;
@@ -8,7 +9,9 @@ import com.eauts.ems.Eauts_management.repository.GradesRepository;
 import com.eauts.ems.Eauts_management.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -74,5 +77,18 @@ public class GradesServiceForT {
             throw new RuntimeException("Không tìm thấy lịch học!");
         }
     }
+
+    @Transactional
+    public void updateMultipleGrades(List<GradesDTO> gradesList) {
+        for (GradesDTO dto : gradesList) {
+            gradesRepository.findById(dto.getGradesId()).ifPresent(grades -> {
+                grades.setAttendance(dto.getAttendance());
+                grades.setMidterm(dto.getMidterm());
+                grades.setFinalExam(dto.getFinalExam());
+                grades.setTotal(dto.getAttendance() * 0.1f + dto.getMidterm() * 0.2f + dto.getFinalExam() * 0.7f);
+            });
+        }
+    }
+
 
 }

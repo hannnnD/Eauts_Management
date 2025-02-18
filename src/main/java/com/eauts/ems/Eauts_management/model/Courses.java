@@ -9,13 +9,13 @@ public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "courses_id")
-    private Long courses_id; // Đổi tên thành camelCase
+    private Long courses_id;
 
     @Column(name = "course_code", unique = true, length = 20, nullable = false)
-    private String courseCode; // Đổi từ course_code -> courseCode
+    private String courseCode;
 
     @Column(name = "course_name", nullable = false, length = 100)
-    private String courseName; // Đổi từ course_name -> courseName
+    private String courseName;
 
     @Column(nullable = false)
     private int credits;
@@ -25,6 +25,19 @@ public class Courses {
 
     @Column(name = "tuition_fee_per_credit", nullable = false)
     private double tuitionFeePerCredit = 500000; // Mặc định 500,000 VND/tín chỉ
+
+    // ✅ Thêm constructor mặc định (bắt buộc để Hibernate hoạt động)
+    public Courses() {}
+
+    // ✅ Constructor có tham số
+    public Courses(Long courses_id, String courseCode, String courseName, int credits, String description, double tuitionFeePerCredit) {
+        this.courses_id = courses_id;
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.credits = credits;
+        this.description = description;
+        this.tuitionFeePerCredit = tuitionFeePerCredit;
+    }
 
     // Getter & Setter
     public double calculateTuitionFee() {
