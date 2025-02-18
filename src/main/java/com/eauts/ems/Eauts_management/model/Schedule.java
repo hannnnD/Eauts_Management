@@ -12,8 +12,8 @@ public class Schedule {
     private Long schedule_id;
 
     @ManyToOne
-    @JoinColumn(name = "lecturer_id", nullable = false)
-    private Teacher lecturer;
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private Teacher teacher;
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
@@ -21,7 +21,7 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "courses_id", nullable = false)
-    private Course course;
+    private Courses courses;
 
     @Column(nullable = false, length = 100)
     private String room;
@@ -46,12 +46,12 @@ public class Schedule {
         this.schedule_id = schedule_id;
     }
 
-    public Teacher getLecturer() {
-        return lecturer;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setLecturer(Teacher lecturer) {
-        this.lecturer = lecturer;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public ClassEntity getStudentClass() {
@@ -62,12 +62,12 @@ public class Schedule {
         this.studentClass = studentClass;
     }
 
-    public Course getCourse() {
-        return course;
+    public Courses getCourse() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Courses courses) {
+        this.courses = courses;
     }
 
     public String getRoom() {

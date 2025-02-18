@@ -1,6 +1,6 @@
 package com.eauts.ems.Eauts_management.controller;
 
-import com.eauts.ems.Eauts_management.model.Course;
+import com.eauts.ems.Eauts_management.model.Courses;
 import com.eauts.ems.Eauts_management.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,25 +18,25 @@ public class CourseController {
 
     // 📌 Lấy danh sách khóa học
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseService.getAllCourses();
+    public ResponseEntity<List<Courses>> getAllCourses() {
+        List<Courses> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }
 
     // 📌 Lấy thông tin khóa học theo ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getCourseById(@PathVariable Long id) {
-        Optional<Course> course = courseService.getCourseById(id);
+        Optional<Courses> course = courseService.getCourseById(id);
         return course.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // 📌 Thêm khóa học mới
     @PostMapping
-    public ResponseEntity<?> createCourse(@RequestBody Course course) {
+    public ResponseEntity<?> createCourse(@RequestBody Courses courses) {
         try {
-            Course newCourse = courseService.createCourse(course);
-            return ResponseEntity.ok(newCourse);
+            Courses newCourses = courseService.createCourse(courses);
+            return ResponseEntity.ok(newCourses);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -44,10 +44,10 @@ public class CourseController {
 
     // 📌 Cập nhật khóa học theo ID
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
+    public ResponseEntity<?> updateCourse(@PathVariable Long id, @RequestBody Courses coursesDetails) {
         try {
-            Course updatedCourse = courseService.updateCourse(id, courseDetails);
-            return ResponseEntity.ok(updatedCourse);
+            Courses updatedCourses = courseService.updateCourse(id, coursesDetails);
+            return ResponseEntity.ok(updatedCourses);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

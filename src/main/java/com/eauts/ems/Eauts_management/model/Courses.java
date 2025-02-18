@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Courses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long coursesId; // Đổi tên thành camelCase
+    @Column(name = "courses_id")
+    private Long courses_id; // Đổi tên thành camelCase
 
     @Column(name = "course_code", unique = true, length = 20, nullable = false)
     private String courseCode; // Đổi từ course_code -> courseCode
@@ -38,12 +39,12 @@ public class Course {
         this.tuitionFeePerCredit = tuitionFeePerCredit;
     }
 
-    public Long getCoursesId() {
-        return coursesId;
+    public Long getCourses_id() {
+        return courses_id;
     }
 
-    public void setCoursesId(Long coursesId) {
-        this.coursesId = coursesId;
+    public void setCourses_id(Long courses_id) {
+        this.courses_id = courses_id;
     }
 
     public String getCourseCode() {

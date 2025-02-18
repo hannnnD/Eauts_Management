@@ -1,6 +1,6 @@
 package com.eauts.ems.Eauts_management.service;
 
-import com.eauts.ems.Eauts_management.model.Course;
+import com.eauts.ems.Eauts_management.model.Courses;
 import com.eauts.ems.Eauts_management.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,34 +14,34 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
-    public List<Course> getAllCourses() {
+    public List<Courses> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    public Optional<Course> getCourseById(Long id) {
+    public Optional<Courses> getCourseById(Long id) {
         return courseRepository.findById(id);
     }
 
-    public Course createCourse(Course course) {
-        if (courseRepository.existsByCourseCode(course.getCourseCode())) {
+    public Courses createCourse(Courses courses) {
+        if (courseRepository.existsByCourseCode(courses.getCourseCode())) {
             throw new RuntimeException("Mã khóa học đã tồn tại!");
         }
-        return courseRepository.save(course);
+        return courseRepository.save(courses);
     }
 
-    public Course updateCourse(Long id, Course courseDetails) {
-        Optional<Course> courseOpt = courseRepository.findById(id);
+    public Courses updateCourse(Long id, Courses coursesDetails) {
+        Optional<Courses> courseOpt = courseRepository.findById(id);
         if (courseOpt.isEmpty()) {
             throw new RuntimeException("Khóa học không tồn tại!");
         }
 
-        Course existingCourse = courseOpt.get();
-        existingCourse.setCourseName(courseDetails.getCourseName());
-        existingCourse.setCredits(courseDetails.getCredits());
-        existingCourse.setDescription(courseDetails.getDescription());
-        existingCourse.setTuitionFeePerCredit(courseDetails.getTuitionFeePerCredit());
+        Courses existingCourses = courseOpt.get();
+        existingCourses.setCourseName(coursesDetails.getCourseName());
+        existingCourses.setCredits(coursesDetails.getCredits());
+        existingCourses.setDescription(coursesDetails.getDescription());
+        existingCourses.setTuitionFeePerCredit(coursesDetails.getTuitionFeePerCredit());
 
-        return courseRepository.save(existingCourse);
+        return courseRepository.save(existingCourses);
     }
 
     public void deleteCourse(Long id) {

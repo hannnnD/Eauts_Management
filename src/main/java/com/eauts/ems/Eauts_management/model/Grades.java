@@ -16,7 +16,7 @@ public class Grades {
 
     @ManyToOne
     @JoinColumn(name = "courses_id", nullable = false)
-    private Course course;
+    private Courses courses;
 
     @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = false)
@@ -51,12 +51,12 @@ public class Grades {
         this.student = student;
     }
 
-    public Course getCourse() {
-        return course;
+    public Courses getCourse() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Courses courses) {
+        this.courses = courses;
     }
 
     public Schedule getSchedule() {
