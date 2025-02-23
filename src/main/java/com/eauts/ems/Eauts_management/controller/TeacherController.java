@@ -12,22 +12,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000") // Cho phép frontend truy cập
 @RestController
 @RequestMapping("/admin/teachers")
 public class TeacherController {
 
-    @Autowired
-    private TeacherService teacherService;
-    private UserService userService;
+    private final TeacherService teacherService;
+    private final UserService userService;
 
+    @Autowired
     public TeacherController(TeacherService teacherService, UserService userService) {
         this.teacherService = teacherService;
         this.userService = userService;
     }
+
     // API lấy danh sách giảng viên
     @GetMapping
-    public List<Teacher> getAllTeachers() {
-        return teacherService.getAllTeachers();
+    public ResponseEntity<List<Teacher>> getAllTeachers() {
+        List<Teacher> teachers = teacherService.getAllTeachers();
+        return ResponseEntity.ok(teachers);
     }
 
     // API lấy giảng viên theo ID
@@ -59,7 +62,8 @@ public class TeacherController {
     // API cập nhật giảng viên
     @PutMapping("/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher newTeacher) {
-        return ResponseEntity.ok(teacherService.updateTeacher(id, newTeacher));
+        Teacher updatedTeacher = teacherService.updateTeacher(id, newTeacher);
+        return ResponseEntity.ok(updatedTeacher);
     }
 
     // API xóa giảng viên
