@@ -8,7 +8,7 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long teacher_id;
+    private Long teacherId;
 
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, nullable = false)
@@ -35,12 +35,12 @@ public class Teacher {
 
     // Getters và Setters
 
-    public Long getTeacher_id() {
-        return teacher_id;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacher_id(Long teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
     public User getUser() {

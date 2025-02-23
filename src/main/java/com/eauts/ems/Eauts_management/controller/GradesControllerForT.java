@@ -43,7 +43,7 @@ public class GradesControllerForT {
         Grades grades = gradesRepository.findById(gradesId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy điểm số!"));
 
-        if (!grades.getSchedule().getTeacher().getTeacher_id().equals(teacherId)) {
+        if (!grades.getSchedule().getTeacher().getTeacherId().equals(teacherId)) {
             throw new RuntimeException("Bạn không có quyền cập nhật điểm cho lớp này!");
         }
 

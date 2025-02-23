@@ -32,6 +32,28 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
+    public Optional<StudentDTO> getStudentByIdU(Long id) {
+        return studentRepository.findById(id).map(this::convertToDTO);
+    }
+
+    private StudentDTO convertToDTO(Student student) {
+        return new StudentDTO(
+                student.getStudent_id(),
+                student.getFull_name(),
+                student.getDate_of_birth(),
+                student.getGender().name(),
+                student.getAddress(),
+                student.getPhone(),
+                student.getEnrollment_year(),
+                student.getStatus().name(),
+                (long) student.getUser().getId(),  // Lấy user_id từ User
+                student.getUser().getUsername(), // Lấy username từ User
+                student.getStudentClass().getClass_id(), // Lấy class_id từ StudentClass
+                student.getStudentClass().getMajor_name(), // Lấy major_name từ StudentClass
+                student.getStudentClass().getClass_name() // Lấy class_name từ StudentClass
+        );
+    }
+
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }

@@ -32,7 +32,7 @@ public class ScheduleService {
     private CourseRepository courseRepository;
 
     public Schedule saveSchedule(Schedule schedule) {
-        if (schedule.getTeacher() == null || schedule.getTeacher().getTeacher_id() == null) {
+        if (schedule.getTeacher() == null || schedule.getTeacher().getTeacherId() == null) {
             throw new IllegalArgumentException("Teacher ID must not be null");
         }
         if (schedule.getStudentClass() == null || schedule.getStudentClass().getClass_id() == null) {
@@ -43,7 +43,7 @@ public class ScheduleService {
         }
 
         // Tìm dữ liệu từ database
-        Teacher teacher = teacherRepository.findById(schedule.getTeacher().getTeacher_id())
+        Teacher teacher = teacherRepository.findById(schedule.getTeacher().getTeacherId())
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
 
         ClassEntity studentClass = classRepository.findById(schedule.getStudentClass().getClass_id())
@@ -75,8 +75,27 @@ public class ScheduleService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Schedule> getScheduleById(Long id) {
-        return scheduleRepository.findById(id);
+    public ScheduleDTO getScheduleById(Long id) {
+        Optional<Schedule> scheduleOptional = scheduleRepository.findById(id);
+        if (scheduleOptional.isPresent()) {
+            Schedule schedule = scheduleOptional.get();
+            return cleanScheduleData(schedule);
+        }
+        return null; // Trả về null nếu không tìm thấy
+    }
+
+    // Làm sạch dữ liệu JSON trả về
+    private ScheduleDTO cleanScheduleData(Schedule schedule) {
+        return new ScheduleDTO(
+                schedule.getId(),
+                schedule.getTeacher().getFull_name(),
+                schedule.getStudentClass().getClass_name(),
+                schedule.getCourse().getCourseName(),
+                schedule.getRoom(),
+                schedule.getShift().name(),
+                schedule.getStart_date(),
+                schedule.getEnd_date()
+        );
     }
 
     public void deleteSchedule(Long id) {
@@ -92,8 +111,8 @@ public class ScheduleService {
         Schedule existingSchedule = existingScheduleOpt.get();
 
         // Cập nhật thông tin nếu có thay đổi
-        if (updatedSchedule.getTeacher() != null && updatedSchedule.getTeacher().getTeacher_id() != null) {
-            Teacher teacher = teacherRepository.findById(updatedSchedule.getTeacher().getTeacher_id())
+        if (updatedSchedule.getTeacher() != null && updatedSchedule.getTeacher().getTeacherId() != null) {
+            Teacher teacher = teacherRepository.findById(updatedSchedule.getTeacher().getTeacherId())
                     .orElseThrow(() -> new RuntimeException("Teacher not found"));
             existingSchedule.setTeacher(teacher);
         }

@@ -36,11 +36,10 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
-    // 🟢 API lấy sinh viên theo ID
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-        Optional<Student> student = studentService.getStudentById(id);
-        return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
+        Optional<StudentDTO> studentDTO = studentService.getStudentByIdU(id);
+        return studentDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // 🟢 API thêm mới sinh viên kèm classId

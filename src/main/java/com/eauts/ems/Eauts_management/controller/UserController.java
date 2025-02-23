@@ -50,7 +50,7 @@ public class UserController {
         if ("TEACHER".equals(role)) {
             Optional<Teacher> teacher = teacherRepository.findByEmail(username);
             if (teacher.isPresent()) { // ✅ Kiểm tra trước khi gọi get()
-                teacherId = teacher.get().getTeacher_id();
+                teacherId = teacher.get().getTeacherId();
             }
         } else if ("STUDENT".equals(role)) {
             Student student = studentRepository.findByEmail(username);

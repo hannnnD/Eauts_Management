@@ -24,9 +24,13 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Schedule> getScheduleById(@PathVariable Long id) {
-        Optional<Schedule> schedule = scheduleService.getScheduleById(id);
-        return schedule.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<ScheduleDTO> getScheduleById(@PathVariable Long id) {
+        ScheduleDTO schedule = scheduleService.getScheduleById(id);
+        if (schedule != null) {
+            return ResponseEntity.ok(schedule);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

@@ -76,7 +76,7 @@ public class UserService {
                 if ("TEACHER".equals(role)) {
                     Optional<Teacher> teacher = teacherRepository.findByEmail(authenticatedUser.getUsername());
                     if (teacher != null) {
-                        teacherId = teacher.get().getTeacher_id();
+                        teacherId = teacher.get().getTeacherId();
                     }
                 } else if ("STUDENT".equals(role)) {
                     Student student = studentRepository.findByEmail(authenticatedUser.getUsername());

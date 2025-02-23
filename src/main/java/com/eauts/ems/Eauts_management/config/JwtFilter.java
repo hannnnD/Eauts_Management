@@ -45,6 +45,12 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = claims.getSubject();
         String role = claims.get("role", String.class);
 
+        // 🟢 Lấy userId từ token và đặt vào request attribute
+        Integer userIdInt = claims.get("id", Integer.class);  // Kiểm tra nếu "id" là Integer
+        if (userIdInt != null) {
+            request.setAttribute("userId", userIdInt.longValue());  // Đặt vào request với kiểu Long
+        }
+
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
             List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
