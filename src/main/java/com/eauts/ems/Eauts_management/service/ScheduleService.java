@@ -35,7 +35,7 @@ public class ScheduleService {
         if (schedule.getTeacher() == null || schedule.getTeacher().getTeacherId() == null) {
             throw new IllegalArgumentException("Teacher ID must not be null");
         }
-        if (schedule.getStudentClass() == null || schedule.getStudentClass().getClass_id() == null) {
+        if (schedule.getStudentClass() == null || schedule.getStudentClass().getClassId() == null) {
             throw new IllegalArgumentException("Class ID must not be null");
         }
         if (schedule.getCourse() == null || schedule.getCourse().getCourses_id() == null) {
@@ -46,7 +46,7 @@ public class ScheduleService {
         Teacher teacher = teacherRepository.findById(schedule.getTeacher().getTeacherId())
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
 
-        ClassEntity studentClass = classRepository.findById(schedule.getStudentClass().getClass_id())
+        ClassEntity studentClass = classRepository.findById(schedule.getStudentClass().getClassId())
                 .orElseThrow(() -> new RuntimeException("Class not found"));
 
         Courses courses = courseRepository.findById(schedule.getCourse().getCourses_id())
@@ -117,8 +117,8 @@ public class ScheduleService {
             existingSchedule.setTeacher(teacher);
         }
 
-        if (updatedSchedule.getStudentClass() != null && updatedSchedule.getStudentClass().getClass_id() != null) {
-            ClassEntity studentClass = classRepository.findById(updatedSchedule.getStudentClass().getClass_id())
+        if (updatedSchedule.getStudentClass() != null && updatedSchedule.getStudentClass().getClassId() != null) {
+            ClassEntity studentClass = classRepository.findById(updatedSchedule.getStudentClass().getClassId())
                     .orElseThrow(() -> new RuntimeException("Class not found"));
             existingSchedule.setStudentClass(studentClass);
         }

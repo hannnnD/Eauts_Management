@@ -9,7 +9,7 @@ public class ClassEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long class_id;
+    private Long classId;
 
     @Column(nullable = false, length = 100)
     private String class_name;
@@ -25,12 +25,12 @@ public class ClassEntity {
 
     // Getters và Setters
 
-    public Long getClass_id() {
-        return class_id;
+    public Long getClassId() {
+        return classId;
     }
 
-    public void setClass_id(Long class_id) {
-        this.class_id = class_id;
+    public void setClassId(Long classId) {
+        this.classId = classId;
     }
 
     public String getClass_name() {

@@ -27,7 +27,7 @@ public class ClassService {
         List<ClassEntity> classEntities = classRepository.findAll();
         return classEntities.stream()
                 .map(classEntity -> new ClassDTO(
-                        classEntity.getClass_id(),
+                        classEntity.getClassId(),
                         classEntity.getClass_name(),
                         classEntity.getMajor_name(),
                         classEntity.getNote()))

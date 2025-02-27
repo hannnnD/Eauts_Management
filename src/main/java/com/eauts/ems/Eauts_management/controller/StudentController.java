@@ -64,7 +64,7 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tạo User!");
         }
 
-        Optional<ClassEntity> classOptional = classService.getClassById(studentRequest.getStudentClass().getClass_id());
+        Optional<ClassEntity> classOptional = classService.getClassById(studentRequest.getStudentClass().getClassId());
         if (classOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Lớp học không tồn tại!");
         }
@@ -107,7 +107,7 @@ public class StudentController {
 
         // 🟠 Kiểm tra nếu cần cập nhật lớp học
         if (studentRequest.getStudentClass() != null) {
-            Optional<ClassEntity> classOptional = classService.getClassById(studentRequest.getStudentClass().getClass_id());
+            Optional<ClassEntity> classOptional = classService.getClassById(studentRequest.getStudentClass().getClassId());
             if (classOptional.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Lớp học không tồn tại!");
             }

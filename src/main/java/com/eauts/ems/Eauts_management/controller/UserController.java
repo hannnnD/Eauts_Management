@@ -55,7 +55,7 @@ public class UserController {
         } else if ("STUDENT".equals(role)) {
             Student student = studentRepository.findByEmail(username);
             if (student != null) {
-                studentId = student.getStudent_id();
+                studentId = student.getStudentId();
             }
         }
 

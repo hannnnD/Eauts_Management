@@ -33,5 +33,5 @@ public interface GradesRepository extends JpaRepository<Grades, Long> {
                            @Param("midterm") List<Float> midterm,
                            @Param("finalExam") List<Float> finalExam,
                            @Param("total") List<Float> total);
-
+    List<Grades> findByStudent_StudentId(Long studentId);
 }

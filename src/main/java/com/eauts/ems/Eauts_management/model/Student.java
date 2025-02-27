@@ -8,7 +8,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long student_id;
+    private Long studentId;
 
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, nullable = false)
@@ -47,12 +47,12 @@ public class Student {
 
     // Getters và Setters
 
-    public Long getStudent_id() {
-        return student_id;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public User getUser() {

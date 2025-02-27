@@ -19,7 +19,7 @@ public class GradesDTO {
 
     public GradesDTO(Grades grades) {
         this.gradesId = grades.getGrades_id();
-        this.studentId = grades.getStudent().getStudent_id();
+        this.studentId = grades.getStudent().getStudentId();
         this.studentName = grades.getStudent().getFull_name();
         this.courseId = grades.getCourse().getCourses_id();
         this.courseName = grades.getCourse().getCourseName();

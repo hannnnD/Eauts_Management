@@ -38,7 +38,7 @@ public class StudentService {
 
     private StudentDTO convertToDTO(Student student) {
         return new StudentDTO(
-                student.getStudent_id(),
+                student.getStudentId(),
                 student.getFull_name(),
                 student.getDate_of_birth(),
                 student.getGender().name(),
@@ -48,7 +48,7 @@ public class StudentService {
                 student.getStatus().name(),
                 (long) student.getUser().getId(),  // Lấy user_id từ User
                 student.getUser().getUsername(), // Lấy username từ User
-                student.getStudentClass().getClass_id(), // Lấy class_id từ StudentClass
+                student.getStudentClass().getClassId(), // Lấy class_id từ StudentClass
                 student.getStudentClass().getMajor_name(), // Lấy major_name từ StudentClass
                 student.getStudentClass().getClass_name() // Lấy class_name từ StudentClass
         );
@@ -61,7 +61,7 @@ public class StudentService {
     public List<StudentDTO> getAllStudents() {
         List<Student> students = studentRepository.findAll();
         return students.stream().map(student -> new StudentDTO(
-                student.getStudent_id(),
+                student.getStudentId(),
                 student.getFull_name(),
                 student.getDate_of_birth(),
                 student.getGender().name(),
@@ -71,7 +71,7 @@ public class StudentService {
                 student.getStatus().name(),
                 (long) student.getUser().getId(),
                 student.getUser().getUsername(),
-                student.getStudentClass().getClass_id(),
+                student.getStudentClass().getClassId(),
                 student.getStudentClass().getMajor_name(),
                 student.getStudentClass().getClass_name()
         )).collect(Collectors.toList());

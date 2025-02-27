@@ -81,7 +81,7 @@ public class UserService {
                 } else if ("STUDENT".equals(role)) {
                     Student student = studentRepository.findByEmail(authenticatedUser.getUsername());
                     if (student != null) {
-                        studentId = student.getStudent_id();
+                        studentId = student.getStudentId();
                     }
                 }
 
